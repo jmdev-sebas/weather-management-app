@@ -1,6 +1,14 @@
 [
   {
-    "name": "Emily",
-    "city": "Penang"
+    "name": "Emma",
+    "city": "Ipoh"
+  },
+  {
+    "name": "Sebastian",
+    "city": "Kuching"
+  },
+  {
+    "name": "Lily",
+    "city": "Perth"
   }
 ]

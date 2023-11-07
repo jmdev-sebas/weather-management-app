@@ -1,17 +1,22 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 
 let users = [];
 
-function saveUserData() {
-    fs.writeFileSync('userData.json', JSON.stringify(users, null, 2));
+async function saveUserData() {
+    try {
+        await fs.writeFile('userData.json', JSON.stringify(users, null, 2));
+        console.log('User data saved to userData.json');
+    } catch (error) {
+        console.log('Error saving the dat:', error);
+    }
 }
 
 //Function to create a new user
-function createUser({ name, city }) {
+async function createUser({ name, city }) {
     const newUser = { name, city };
     users.push(newUser);
     console.log(users);
-    saveUserData(); //when we create a user, it will be saved into userData.json
+    await saveUserData(); //when we create a user, it will be saved into userData.json
     return newUser;
 }
 
@@ -21,16 +26,27 @@ function getUserByName(name) {
 }
 
 //Function to update user city by name
-function updateUserCity(name, newCity) {
+async function updateUserCity(name, newCity) {
     const user = getUserByName(name);
 
     if(user) {
         user.city = newCity;
-        //saveUserData() // edit the city info, it will be saved into userData.json
+        await saveUserData() // edit the city info, it will be saved into userData.json
         return user;
     }
     return null;
 }
+
+async function loadUserData() {
+    try {
+        const data = await fs.readFile('userData.json','utf-8');
+        users = JSON.parse(data);
+    } catch (error) {
+        console.log('Error loading user data', error)
+    }
+}
+
+loadUserData();
 
 module.exports = {
     createUser,
