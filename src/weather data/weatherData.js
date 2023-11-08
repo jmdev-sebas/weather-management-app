@@ -1,14 +1,8 @@
-let fetch;
-
-async function loadFetch() {
-    if (!fetch) {
-        fetch = (await (import('node-fetch'))).default;
-    }   
-}
+import fetch from 'node-fetch';
+import 'dotenv/config';
 
 async function fetchWeatherData(city) {
-    await loadFetch();
-    const apiKey = '6791eddb42e7466f9f332842230711';
+    const apiKey = process.env.API_KEY;
     const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
 
     try {
@@ -24,4 +18,4 @@ async function fetchWeatherData(city) {
     }
 }
 
-module.exports = { fetchWeatherData };
+export { fetchWeatherData };

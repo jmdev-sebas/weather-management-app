@@ -1,12 +1,20 @@
-const fs = require('fs').promises;
-const { fetchWeatherData } = require('./weatherData');
+import { promises as fs } from 'fs';
+import { fetchWeatherData } from './weather data/weatherData.js';
+import path from 'path'; 
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+// This gives you the directory name of the current module.
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 let users = [];
 
 async function saveUserData() {
     try {
-        await fs.writeFile('userData.json', JSON.stringify(users, null, 2));
-        console.log('User data saved to userData.json');
+        // __dirname is the directory name of the current module, i.e. file system path to src/
+        const filePath = path.join(__dirname, '..', 'data', 'data', 'userData.json');
+        await fs.writeFile(filePath, JSON.stringify(users, null, 2));
+        
     } catch (error) {
         console.log('Error saving the dat:', error);
     }
@@ -28,14 +36,8 @@ async function createUser({ name, city }) {
     return newUser;
 }
 
-//Function to retrieve a user's information
-function getUserByName(name) {
-    return users.find((user) => user.name === name); //arrow function that checks if user exist or not
-}
-
 //Function to update user city by name
 async function updateUserCity(name, newCity) {
-<<<<<<< HEAD
     
     const index = users.findIndex(function verifyIfUserExit(user) {
         return user.name === name;
@@ -53,12 +55,6 @@ async function updateUserCity(name, newCity) {
 
         users[index].city = newCity;
         users[index].weatherData = weatherData;
-=======
-    const user = getUserByName(name);
-
-    if(user) {
-        user.city = newCity;
->>>>>>> parent of 286ada5 (added the weather API feature)
         await saveUserData() // edit the city info, it will be saved into userData.json
         return user;
     }
@@ -67,7 +63,9 @@ async function updateUserCity(name, newCity) {
 
 async function loadUserData() {
     try {
-        const data = await fs.readFile('userData.json','utf-8');
+        // __dirname is the directory name of the current module, i.e. file system path to src/
+        const filePath = path.join(__dirname, '..', 'data', 'data', 'userData.json');
+        const data = await fs.readFile(filePath, 'utf-8'); // Read the file with UTF-8 encoding
         users = JSON.parse(data);
     } catch (error) {
         console.log('Error loading user data', error)
@@ -76,31 +74,8 @@ async function loadUserData() {
 
 loadUserData();
 
-module.exports = {
+export {
     createUser,
-    getUserByName,
     updateUserCity,
+    loadUserData
 }
-
-
-/*
-//Test createUser
-const user1 = createUser({ name: 'Emily', city: 'New York' });
-console.log(user1)
-
-//Test getUserByName
-const foundUser = getUserByName('Emily');
-if(foundUser) {
-    console.log("Found user by name: " + foundUser.name)
-} else {
-    console.log("User Not found");
-}
-
-//Test updateUserCity
-const updateUser = updateUserCity('Emily', 'Kuala Lumpur');
-if(updateUser) {
-    console.log("User city updated: " + updateUser.city)
-} else {
-    console.log("User Not found for the city update");
-}
-*/

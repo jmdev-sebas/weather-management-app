@@ -1,12 +1,13 @@
-const readline = require('readline');
-const { createUser, updateUserCity, getUserByName } = require('./userData');
+import readline from 'readline';
+import { createUser, updateUserCity } from '../../src/userData.js';
+import exp from 'constants';
 
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
 });
 
-async function main() {
+async function handleIO() {
     try {
         const command = await askQuestion('Enter a command (create/update):');
 
@@ -17,13 +18,8 @@ async function main() {
                 console.log('User has been created: ', newUser) //Output the stored value.
         } else if (command === 'update') {
                 const name = await askQuestion('Enter name: ');
-<<<<<<< HEAD
                 const newCity = await askQuestion('Enter new city: ');
                 const updateUser = await updateUserCity(name, newCity); 
-=======
-                const city = await askQuestion('Enter new city: ');
-                const updateUser = updateUserCity(name, newCity); 
->>>>>>> parent of 286ada5 (added the weather API feature)
                 if(updateUser) {
                     console.log("User updated: " + updateUser)
                 } else {
@@ -39,10 +35,10 @@ async function main() {
     }
 }
 
-main();
-
 function askQuestion(question) {
     return new Promise((resolve) => {
         rl.question(question, resolve);
     });
 }
+
+export { handleIO }
