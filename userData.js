@@ -35,6 +35,7 @@ function getUserByName(name) {
 
 //Function to update user city by name
 async function updateUserCity(name, newCity) {
+<<<<<<< HEAD
     
     const index = users.findIndex(function verifyIfUserExit(user) {
         return user.name === name;
@@ -52,10 +53,16 @@ async function updateUserCity(name, newCity) {
 
         users[index].city = newCity;
         users[index].weatherData = weatherData;
+=======
+    const user = getUserByName(name);
+
+    if(user) {
+        user.city = newCity;
+>>>>>>> parent of 286ada5 (added the weather API feature)
         await saveUserData() // edit the city info, it will be saved into userData.json
-        return users[index];
+        return user;
     }
-    return null; // if it doesnt exist, return null
+    return null;
 }
 
 async function loadUserData() {

@@ -17,8 +17,13 @@ async function main() {
                 console.log('User has been created: ', newUser) //Output the stored value
         } else if (command === 'update') {
                 const name = await askQuestion('Enter name: ');
+<<<<<<< HEAD
                 const newCity = await askQuestion('Enter new city: ');
                 const updateUser = await updateUserCity(name, newCity); 
+=======
+                const city = await askQuestion('Enter new city: ');
+                const updateUser = updateUserCity(name, newCity); 
+>>>>>>> parent of 286ada5 (added the weather API feature)
                 if(updateUser) {
                     console.log("User updated: " + updateUser)
                 } else {
