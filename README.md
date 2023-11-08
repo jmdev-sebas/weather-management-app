@@ -1,6 +1,6 @@
 # WeatherProfileManager
 
-## Project repository structure
+## Project directory structure
 ```
 weather-management-app/           # root of the project
 │
@@ -26,7 +26,41 @@ weather-management-app/           # root of the project
 └── node_modules/                 # Node modules (usually not checked into version control)
 ```
 
-## Create .env file in src/
+## Instructions on how to use this project
+
+### Step 1: Clone the repo to your local computer
+1. In your desired directory, run the command ```git clone git@github.com:adnexio-sec-bootcamp-oct-2023/weather-management-app.git weather-management-app```
+(Anyone with access problem, please find me.)
+
+### Step 2: Install the necessary dependencies and packages
+1. Inside your project root directory, run the ```npm install``` in the terminal to install any necessary dependencies this project needs.
+
+### Step 3: Create an environment file
 1. Go inside src and create a file .env
-2. Add the following inside you .env file ```API_KEY=<get-you-api-key-from-weatherapi.com>```
-3. After you've gotten your API, paste it after the ```=``` without quotations ```' '``` or ```" "```
+```
+weather-management-app/           # root of the project
+│
+├── src/                          # Source files
+|   ...                           # Other directories & files
+|   └── index.js                  # Initial project
+|   └── .env                      # Create your .env file here
+...                               # Other directories & files
+```
+2. Go to weatherapi.com to sign up and after that obtain your API key
+3. Inside your .env file, add the API key like so:
+e.g. if your API key is 12345678910
+```
+    API_KEY=12345678910          # this is correct
+    API_KEY="12345678910"        # this is WRONG
+```
+
+### Step 4: Try the app
+1. ```cd``` to src and type ```node index.js```
+e.g. If you have cd to src
+```
+    user@Asus:~/weather-management-app/src$ node index.js
+```
+e.g. If you still in the root of your project then do like this
+```
+    user@Asus:~/weather-management-app/src$ node src/index.js
+```
