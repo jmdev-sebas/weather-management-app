@@ -24,7 +24,7 @@ async function createUser({ name, city }) {
     }
     const newUser = { name, city, weatherData };
     users.push(newUser);
-    await saveUserData(); //when we create a user, it will be saved into userData.json
+    await saveUserData(); //when we create a user, it will be saved into userData.json.
     return newUser;
 }
 
