@@ -63,12 +63,20 @@ async function updateUserCity(name, newCity) {
 
 async function loadUserData() {
     try {
-        // __dirname is the directory name of the current module, i.e. file system path to src/
+        // __dirname is the directory name of the current module, i.e., the file system path to src/
         const filePath = path.join(__dirname, '..', 'data', 'data', 'userData.json');
         const data = await fs.readFile(filePath, 'utf-8'); // Read the file with UTF-8 encoding
         users = JSON.parse(data);
     } catch (error) {
-        console.log('Error loading user data', error)
+        if (error.code === 'ENOENT') {
+            console.log('userData.json does not exist. A new file will be created upon saving data.');
+            // If the file doesn't exist, you can initialize `users` as an empty array
+            // or whatever your default is supposed to be.
+            users = [];
+        } else {
+            // If it's a different kind of error, log it.
+            console.log('Error loading user data:', error);
+        }
     }
 }
 
