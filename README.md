@@ -62,5 +62,5 @@ e.g. If you have cd to src
 ```
 e.g. If you still in the root of your project then do like this
 ```
-    user@Asus:~/weather-management-app/src$ node src/index.js
+    user@Asus:~/weather-management-app$ node src/index.js
 ```
