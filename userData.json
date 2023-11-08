@@ -1,6 +1,14 @@
 [
   {
-    "name": "Jonathan",
+    "name": "Alice",
+    "city": "New York"
+  },
+  {
+    "name": "Test",
+    "city": "Test"
+  },
+  {
+    "name": "Melvin",
     "city": "Kuala Lumpur"
   }
 ]

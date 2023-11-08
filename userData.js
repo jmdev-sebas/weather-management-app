@@ -27,14 +27,18 @@ function getUserByName(name) {
 
 //Function to update user city by name
 async function updateUserCity(name, newCity) {
-    const user = getUserByName(name);
+    
+    const index = users.findIndex(function verifyIfUserExit(user) {
+        return user.name === name;
+    });
 
-    if(user) {
-        user.city = newCity;
+    if (index !== -1) {
+        users[index].city = newCity;
+
         await saveUserData() // edit the city info, it will be saved into userData.json
-        return user;
+        return users[index];
     }
-    return null;
+    return null; // if it doesnt exist, return null
 }
 
 async function loadUserData() {
