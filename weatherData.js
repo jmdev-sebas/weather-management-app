@@ -1,6 +1,13 @@
-const fetch = require('node-fetch');
+let fetch;
+
+async function loadFetch() {
+    if (!fetch) {
+        fetch = (await (import('node-fetch'))).default;
+    }   
+}
 
 async function fetchWeatherData(city) {
+    await loadFetch();
     const apiKey = '6791eddb42e7466f9f332842230711';
     const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
 

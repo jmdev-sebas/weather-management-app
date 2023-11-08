@@ -1,4 +1,5 @@
 const fs = require('fs').promises;
+const { fetchWeatherData } = require('./weatherData');
 
 let users = [];
 
@@ -13,9 +14,16 @@ async function saveUserData() {
 
 //Function to create a new user
 async function createUser({ name, city }) {
-    const newUser = { name, city };
+    const fullWeatherData = await fetchWeatherData(city);
+    const { localtime } = fullWeatherData.location;
+    const { text } = fullWeatherData.current.condition;
+
+    const weatherData = {
+        localtime,
+        text
+    }
+    const newUser = { name, city, weatherData };
     users.push(newUser);
-    console.log(users);
     await saveUserData(); //when we create a user, it will be saved into userData.json
     return newUser;
 }
@@ -33,8 +41,17 @@ async function updateUserCity(name, newCity) {
     });
 
     if (index !== -1) {
-        users[index].city = newCity;
+        const fullWeatherData = await fetchWeatherData(newCity); // fetches the full data
+        const { localtime } = fullWeatherData.location; //select the localtime property from the location property
+        const { text } = fullWeatherData.current.condition; //selectec the text property from condition property which from the current property
 
+        const weatherData = {
+            localtime,
+            text
+        }
+
+        users[index].city = newCity;
+        users[index].weatherData = weatherData;
         await saveUserData() // edit the city info, it will be saved into userData.json
         return users[index];
     }

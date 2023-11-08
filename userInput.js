@@ -13,12 +13,12 @@ async function main() {
         if(command === 'create') {
                 const name = await askQuestion('Enter name: ');
                 const city = await askQuestion('Enter city: ');
-                const newUser = createUser({ name, city }); // Store the values 
+                const newUser = await createUser({ name, city }); // Store the values 
                 console.log('User has been created: ', newUser) //Output the stored value
         } else if (command === 'update') {
                 const name = await askQuestion('Enter name: ');
                 const newCity = await askQuestion('Enter new city: ');
-                const updateUser = updateUserCity(name, newCity); 
+                const updateUser = await updateUserCity(name, newCity); 
                 if(updateUser) {
                     console.log("User updated: " + updateUser)
                 } else {
