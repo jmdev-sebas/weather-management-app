@@ -29,7 +29,7 @@ weather-management-app/           # root of the project
 ## Instructions on how to use this project
 
 ### Step 1: Clone the repo to your local computer
-1. In your desired directory, run the command ```git clone git@github.com:adnexio-sec-bootcamp-oct-2023/weather-management-app.git weather-management-app```
+1. In your desired directory, run the command ```git clone https://github.com/jmdev-sebas/weather-management-app.git weather-management-app```
 (Anyone with access problem, please find me.)
 
 ### Step 2: Install the necessary dependencies and packages
